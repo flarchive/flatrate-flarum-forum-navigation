@@ -1,0 +1,104 @@
+.FlatRatePresentationNav {
+  margin: 0;
+  padding: 0;
+}
+
+/* Presentation owner: hide native primary TagLinkButton list while this extension is active. */
+.IndexPage-nav .TagLinkButton,
+.IndexPage-nav .item-separator,
+.IndexPage-nav .item-moreTags {
+  display: none !important;
+}
+
+.FlatRatePresentationNav-list,
+.FlatRatePresentationNav-tree,
+.FlatRatePresentationNav-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.FlatRatePresentationNav-item {
+  margin: 0.15rem 0;
+}
+
+.FlatRatePresentationNav-row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 2rem;
+}
+
+.FlatRatePresentationNav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.35rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.FlatRatePresentationNav-link:hover,
+.FlatRatePresentationNav-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.FlatRatePresentationNav-groupLabel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.35rem;
+  font-weight: 600;
+}
+
+.FlatRatePresentationNav-brand.depth-1 {
+  margin-left: 1rem;
+}
+
+.FlatRatePresentationNav-brandLink {
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .FlatRatePresentationNav-link,
+  .FlatRatePresentationNav-groupLabel {
+    min-height: 2.5rem;
+  }
+
+  .App-drawer {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .App-drawer .item-flatrateDrawerNav {
+    float: none !important;
+    display: block !important;
+    width: 100%;
+    clear: both;
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 0 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .App-drawer .FlatRateDrawerNav,
+  .App-drawer .FlatRatePresentationNav,
+  .App-drawer .FlatRatePresentationNav-link,
+  .App-drawer .FlatRatePresentationNav-groupLabel {
+    width: 100%;
+  }
+
+  .App-drawer .FlatRatePresentationNav-link,
+  .App-drawer .FlatRatePresentationNav-groupLabel {
+    display: flex;
+  }
+}
+
+/* HeaderSecondary also renders in the desktop top bar. Do not mount the
+   41-board tree there; IndexPage sideNav already owns desktop presentation. */
+@media (min-width: 768px) {
+  .item-flatrateDrawerNav {
+    display: none !important;
+  }
+}
