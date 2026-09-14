@@ -1,0 +1,208 @@
+.FlatRatePresentationNav {
+  margin: 0;
+  padding: 0;
+}
+
+/* Presentation owner: hide native primary TagLinkButton list while this extension is active. */
+.IndexPage-nav .TagLinkButton,
+.IndexPage-nav .item-separator,
+.IndexPage-nav .item-moreTags {
+  display: none !important;
+}
+
+.FlatRatePresentationNav-list,
+.FlatRatePresentationNav-tree,
+.FlatRatePresentationNav-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.FlatRatePresentationNav-item {
+  margin: 0.15rem 0;
+}
+
+.FlatRatePresentationNav-row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 2rem;
+}
+
+.FlatRatePresentationNav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.35rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.FlatRatePresentationNav-link:hover,
+.FlatRatePresentationNav-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.FlatRatePresentationNav-link--start,
+.FlatRatePresentationNav-link--technician {
+  gap: 0.4rem;
+}
+
+.FlatRatePresentationNav-link--start,
+.FlatRatePresentationTitle--start {
+  color: #66ff00 !important;
+  font-weight: 700;
+}
+
+.FlatRatePresentationNav-link--start .icon,
+.App-titleControl .fa-play-circle {
+  color: #66ff00 !important;
+}
+
+.FlatRatePresentationNav-brand.depth-1 {
+  margin-left: 1rem;
+}
+
+.FlatRatePresentationNav-brandLink {
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .FlatRatePresentationNav-link {
+    min-height: 2.5rem;
+  }
+
+  .App-drawer {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Phone drawer stacks HeaderSecondary vertically. Keep Search first,
+     then the session avatar/profile above Notifications. Desktop header
+     order is unchanged because this rule is phone-only. */
+  .App-drawer .Header-controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .App-drawer .item-search {
+    order: -2;
+  }
+
+  .App-drawer .item-session {
+    order: -1;
+  }
+
+  .App-drawer .item-flatrateDrawerNav {
+    float: none !important;
+    display: block !important;
+    width: 100%;
+    clear: both;
+    margin: 0.75rem 0 0;
+    /* Match Header-controls > li horizontal inset (10px). */
+    padding: 0.75rem 10px 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .App-drawer .FlatRateDrawerNav,
+  .App-drawer .FlatRatePresentationNav,
+  .App-drawer .FlatRatePresentationNav-link {
+    width: 100%;
+  }
+
+  .App-drawer .FlatRatePresentationNav-link {
+    display: flex;
+    /* Match Flarum 1.8.19 .Button horizontal padding in the drawer. */
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .App-drawer .FlatRatePresentationNav-brandLink {
+    gap: 0.4rem;
+  }
+
+  /* Live Chat is a HeaderSecondary LinkButton without the same drawer
+     padding as Notifications. Do not mutate the live-chat package. */
+  .App-drawer .item-LiveChats > a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 13px;
+    text-align: left;
+    min-height: 36px;
+  }
+
+  .App-drawer .item-LiveChats .icon,
+  .App-drawer .item-LiveChats .Button-icon {
+    margin-right: 7px;
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+  }
+
+  .App-drawer .FlatRatePresentationNav-item--technician-topics,
+  .App-titleControl .FlatRatePresentationNav-item--technician-topics {
+    display: none !important;
+  }
+
+  /* Phone title-control is a full-width bottom sheet. START and brands
+     must use the same hasIcon gutter as All Discussions / Following. */
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-item--link {
+    margin: 0;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-item--link .FlatRatePresentationNav-link,
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    gap: 0;
+    font-size: 16px;
+    min-height: 0;
+    padding: 15px 20px 15px 50px;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-item--link .icon,
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink .icon {
+    width: 16px;
+    margin-left: -30px;
+    margin-right: 14px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-item--brands {
+    margin: 0;
+
+    .FlatRatePresentationNav-tree,
+    .FlatRatePresentationNav-children,
+    .FlatRatePresentationNav-row {
+      width: 100%;
+    }
+
+    .FlatRatePresentationNav-brand.depth-1 {
+      margin-left: 0;
+    }
+
+    .FlatRatePresentationNav-brand.depth-1 .FlatRatePresentationNav-brandLink {
+      padding-left: 70px;
+    }
+  }
+}
+
+/* HeaderSecondary also renders in the desktop top bar. Do not mount the
+   41-board tree or Following copy there; IndexPage sideNav already owns
+   desktop presentation. */
+@media (min-width: 768px) {
+  .item-flatrateDrawerNav,
+  .item-flatrateDrawerFollowing {
+    display: none !important;
+  }
+
+  .IndexPage-nav .FlatRatePresentationNav-brandLink .icon {
+    display: none;
+  }
+}
