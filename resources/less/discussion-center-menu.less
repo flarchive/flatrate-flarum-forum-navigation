@@ -1,0 +1,46 @@
+/* Discussion routes use the board name as the mobile center control and open
+   a flat HOME + Brand LinkButton picker. Preserve the native post scrubber
+   on tablet/desktop; only replace its phone-header role. */
+@media (max-width: 767px) {
+  .DiscussionPage-nav .item-scrubber {
+    display: none !important;
+  }
+
+  .DiscussionPage-nav .item-flatrateDiscussionBrandPicker {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .DiscussionPage-nav .item-flatrateDiscussionBrandPicker {
+    display: none !important;
+  }
+}
+
+/* Direct SelectDropdown children — distinct from drawer PresentationNav. */
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionPicker-link {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionPicker-home,
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink {
+  justify-content: flex-start;
+  width: 15rem;
+  max-width: calc(100% - 40px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink.depth-1 {
+  padding-left: 1.5rem;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink.depth-2 {
+  padding-left: 3rem;
+}
