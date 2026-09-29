@@ -1,0 +1,184 @@
+<?php
+
+namespace FlatRate\ForumNavigation;
+
+use InvalidArgumentException;
+use RuntimeException;
+
+final class NavigationManifest
+{
+    public const SCHEMA_VERSION = 2;
+
+    private static ?array $cached = null;
+
+    public static function assetPath(): string
+    {
+        return dirname(__DIR__) . '/resources/navigation-runtime-manifest.json';
+    }
+
+    public static function load(): array
+    {
+        if (self::$cached !== null) {
+            return self::$cached;
+        }
+
+        $path = self::assetPath();
+        if (!is_file($path)) {
+            throw new RuntimeException('Navigation runtime manifest asset is missing: ' . $path);
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+        if (!is_array($decoded)) {
+            throw new RuntimeException('Navigation runtime manifest asset is invalid JSON');
+        }
+
+        self::assertValid($decoded);
+        self::$cached = $decoded;
+
+        return self::$cached;
+    }
+
+    public static function pushToStartPath(): string
+    {
+        return CommunityRedirect::TARGET_PATH;
+    }
+
+    public static function legacyCommunityRoute(): string
+    {
+        return (string) (self::load()['legacyCommunity']['route'] ?? CommunityRedirect::ROUTE_PATH);
+    }
+
+    /**
+     * @deprecated IA-011: /community is a compatibility redirect, not a public destination.
+     */
+    public static function communityRoute(): string
+    {
+        return self::legacyCommunityRoute();
+    }
+
+    public static function generalLiveAvailable(): bool
+    {
+        return (bool) (self::load()['generalLive']['available'] ?? false);
+    }
+
+    public static function generalLiveRoute(): ?string
+    {
+        $route = self::load()['generalLive']['route'] ?? null;
+        return is_string($route) && $route !== '' ? $route : null;
+    }
+
+    public static function assertValid(array $manifest): void
+    {
+        if (($manifest['schemaVersion'] ?? null) !== self::SCHEMA_VERSION) {
+            throw new InvalidArgumentException('schemaVersion must be 2');
+        }
+        if (($manifest['kind'] ?? null) !== 'forum-navigation-runtime-manifest') {
+            throw new InvalidArgumentException('kind mismatch');
+        }
+        if (!isset($manifest['groups']) || !is_array($manifest['groups']) || count($manifest['groups']) !== 3) {
+            throw new InvalidArgumentException('exactly three groups required');
+        }
+
+        $labels = array_map(static fn ($group) => $group['label'] ?? null, $manifest['groups']);
+        if ($labels !== ['Push to Start', 'Technician Topics', 'Brands']) {
+            throw new InvalidArgumentException('group order must be Push to Start, Technician Topics, Brands');
+        }
+
+        $modes = array_map(static fn ($group) => [$group['id'] ?? null, $group['mode'] ?? null], $manifest['groups']);
+        if ($modes !== [
+            ['community', 'link'],
+            ['technician-topics', 'link'],
+            ['brands', 'tree'],
+        ]) {
+            throw new InvalidArgumentException('sidebar modes mismatch');
+        }
+
+        $pushToStart = $manifest['groups'][0]['destination'] ?? [];
+        if (($pushToStart['type'] ?? null) !== 'tag'
+            || ($pushToStart['boardKey'] ?? null) !== 'start-here'
+            || ($pushToStart['slug'] ?? null) !== 'start-here') {
+            throw new InvalidArgumentException('Push to Start destination must remain /t/start-here');
+        }
+
+        $technician = $manifest['groups'][1]['destination'] ?? [];
+        if (($technician['boardKey'] ?? null) !== 'general-shop-discussion'
+            || ($technician['slug'] ?? null) !== 'general-shop-discussion') {
+            throw new InvalidArgumentException('Technician Topics destination must remain general-shop-discussion');
+        }
+
+        $brands = $manifest['groups'][2]['boards'] ?? null;
+        if (!is_array($brands)) {
+            throw new InvalidArgumentException('Brands boards required');
+        }
+
+        $keys = [];
+        $walk = static function (array $nodes) use (&$walk, &$keys): void {
+            foreach ($nodes as $node) {
+                $key = $node['boardKey'] ?? null;
+                if (!is_string($key) || $key === '') {
+                    throw new InvalidArgumentException('brand boardKey required');
+                }
+                if (str_ends_with($key, '-live') || in_array($key, ['start-here', 'general-live', 'community-general-live'], true)) {
+                    throw new InvalidArgumentException('forbidden sidebar child: ' . $key);
+                }
+                $keys[] = $key;
+                $children = $node['children'] ?? [];
+                if (!is_array($children)) {
+                    throw new InvalidArgumentException('children must be an array for ' . $key);
+                }
+                $walk($children);
+            }
+        };
+        $walk($brands);
+
+        if (count($keys) !== 45 || count(array_unique($keys)) !== 45) {
+            throw new InvalidArgumentException('BRAND_BOARD_COUNT must be 45 without duplicates');
+        }
+
+        $byKey = [];
+        $index = static function (array $nodes) use (&$index, &$byKey): void {
+            foreach ($nodes as $node) {
+                $byKey[$node['boardKey']] = $node;
+                $index($node['children'] ?? []);
+            }
+        };
+        $index($brands);
+
+        $gmNames = array_map(static fn ($child) => $child['name'] ?? null, $byKey['gm']['children'] ?? []);
+        $cdjrNames = array_map(static fn ($child) => $child['name'] ?? null, $byKey['cdjr']['children'] ?? []);
+        $jlrNames = array_map(static fn ($child) => $child['name'] ?? null, $byKey['jlr']['children'] ?? []);
+        if ($gmNames !== ['Buick', 'Cadillac', 'Chevrolet', 'GMC']) {
+            throw new InvalidArgumentException('GM children mismatch');
+        }
+        if ($cdjrNames !== ['Chrysler', 'Dodge', 'Jeep', 'Ram']) {
+            throw new InvalidArgumentException('CDJR children mismatch');
+        }
+        if ($jlrNames !== ['Jaguar', 'Land Rover', 'Range Rover']) {
+            throw new InvalidArgumentException('JLR children mismatch');
+        }
+
+        if (($manifest['pushToStart']['boardKey'] ?? null) !== 'start-here'
+            || ($manifest['pushToStart']['slug'] ?? null) !== 'start-here') {
+            throw new InvalidArgumentException('pushToStart must remain start-here');
+        }
+
+        if (($manifest['legacyCommunity']['route'] ?? null) !== '/community'
+            || ($manifest['legacyCommunity']['redirectTarget'] ?? null) !== '/t/start-here') {
+            throw new InvalidArgumentException('legacyCommunity must redirect /community to /t/start-here');
+        }
+
+        if (($manifest['generalLive']['available'] ?? null) !== true) {
+            throw new InvalidArgumentException('GENERAL_LIVE_AVAILABLE must be true');
+        }
+        $live = $manifest['generalLive'] ?? null;
+        if (!is_array($live)
+            || ($live['roomKey'] ?? null) !== 'community-general-live'
+            || ($live['route'] ?? null) !== '/live/community-general-live') {
+            throw new InvalidArgumentException('generalLive must remain community-general-live');
+        }
+
+        if (array_key_exists('community', $manifest)) {
+            throw new InvalidArgumentException('v2 manifest must not nest public Community metadata');
+        }
+    }
+}
