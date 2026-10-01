@@ -1,0 +1,209 @@
+import app from 'flarum/forum/app';
+import { extend, override } from 'flarum/common/extend';
+import Button from 'flarum/common/components/Button';
+import Navigation from 'flarum/common/components/Navigation';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
+import IndexPage from 'flarum/forum/components/IndexPage';
+import LinkButton from 'flarum/common/components/LinkButton';
+import SelectDropdown from 'flarum/common/components/SelectDropdown';
+import ItemList from 'flarum/common/utils/ItemList';
+
+import CenterQuickRail from './components/CenterQuickRail';
+import {
+  resolveDiscussionBoardTarget,
+  resolveDiscussionBrandAccessibleLabel,
+  resolveDiscussionBrandTitle,
+} from './utils/discussionBrandTitle';
+import { listDiscussionBrandBoards } from './utils/discussionBrandDropdownItems';
+import { brandHref, getNavigationManifest, tagHref } from './utils/manifest';
+import { PICK_A_BRAND } from './utils/presentationTitle';
+import { recordOpenBoardAtTopIntent, consumeOpenBoardAtTopIntent } from './utils/boardBackIntent';
+
+function currentDiscussionBoardTarget() {
+  const current = app.current;
+
+  if (
+    !current ||
+    typeof current.matches !== 'function' ||
+    !current.matches(DiscussionPage)
+  ) {
+    return null;
+  }
+
+  const discussion =
+    typeof current.get === 'function'
+      ? current.get('discussion')
+      : null;
+
+  return resolveDiscussionBoardTarget({
+    discussion,
+    manifest: getNavigationManifest(),
+  });
+}
+
+function discussionBoardBackButton(target) {
+  // Explicit force documents the Mithril route-remount contract required for
+  // board transitions (URL change alone is not acceptance).
+  return (
+    <LinkButton
+      className="Button Navigation-back Button--icon FlatRateDiscussionBackToBoard"
+      href={tagHref(target.slug)}
+      icon="fas fa-chevron-left"
+      aria-label={`Back to ${target.name}`}
+      force
+      onclick={() => {
+        recordOpenBoardAtTopIntent();
+      }}
+    />
+  );
+}
+
+app.initializers.add(
+  'flatrate-discussion-center-menu',
+  () => {
+    // Flarum 1.8.19 uses the PostStreamScrubber as DiscussionPage's mobile
+    // App-titleControl. Add a dedicated center dropdown instead. CSS hides the
+    // scrubber only on phones, so desktop post navigation stays unchanged.
+    extend(DiscussionPage.prototype, 'sidebarItems', function (items) {
+      const manifest = getNavigationManifest();
+      if (!manifest || !this.discussion) {
+        return;
+      }
+
+      const visibleTitle = resolveDiscussionBrandTitle({ discussion: this.discussion, manifest });
+      const accessibleLabel = resolveDiscussionBrandAccessibleLabel({
+        discussion: this.discussion,
+        manifest,
+      });
+
+      const pickerItems = new ItemList();
+      pickerItems.add(
+        'flatrateQuickRail',
+        <CenterQuickRail manifest={manifest} page={this} />,
+        200
+      );
+
+      // SelectDropdown styles only li > a|button. Do not nest PresentationNav
+      // (a <div> tree) here — production left item-flatratePresentationNav empty.
+      // Reuse the canonical Brand manifest via LinkButton children instead.
+      listDiscussionBrandBoards(manifest).forEach((board, index) => {
+        pickerItems.add(
+          `brand-${board.boardKey}`,
+          <LinkButton
+            className={`Button--flat FlatRateDiscussionPicker-link FlatRateDiscussionBrandLink depth-${board.depth}`}
+            href={brandHref(board)}
+            force
+          >
+            <span className="FlatRateDiscussionBrandName">{board.name}</span>
+          </LinkButton>,
+          -14 - index
+        );
+      });
+
+      if (items.items && items.items.flatrateDiscussionBrandPicker) {
+        items.remove('flatrateDiscussionBrandPicker');
+      }
+
+      items.add(
+        'flatrateDiscussionBrandPicker',
+        <SelectDropdown
+          buttonClassName="Button"
+          className="App-titleControl FlatRateDiscussionBrandPicker"
+          accessibleToggleLabel={accessibleLabel}
+          defaultLabel={visibleTitle}
+        >
+          {pickerItems.toArray()}
+        </SelectDropdown>,
+        -90
+      );
+    });
+
+    // Flarum 1.8.19 Navigation.view() renders through getBackButton() when
+    // app history can go back, and getDrawerButton() on direct-entry/no-history.
+    // Override both live seams with a stable owning-board LinkButton. Do not
+    // invoke Flarum app-history back helpers — the board route is the destination.
+    override(Navigation.prototype, 'getBackButton', function (original) {
+      const target = currentDiscussionBoardTarget();
+
+      if (!target) {
+        return original();
+      }
+
+      return discussionBoardBackButton(target);
+    });
+
+    override(Navigation.prototype, 'getDrawerButton', function (original) {
+      const target = currentDiscussionBoardTarget();
+
+      if (!target) {
+        return original();
+      }
+
+      return discussionBoardBackButton(target);
+    });
+
+    // Custom board-arrow: one-shot open-board-at-top intent. Native Back keeps
+    // lastDiscussion restoration.
+    extend(IndexPage.prototype, 'oninit', function () {
+      if (consumeOpenBoardAtTopIntent()) {
+        this.lastDiscussion = undefined;
+        this.flatrateOpenBoardAtTop = true;
+      }
+    });
+
+    extend(IndexPage.prototype, 'oncreate', function () {
+      if (!this.flatrateOpenBoardAtTop) {
+        return;
+      }
+
+      this.flatrateOpenBoardAtTop = false;
+
+      if (typeof window !== 'undefined' && window.jQuery) {
+        window.jQuery(window).scrollTop(0);
+      } else if (typeof window !== 'undefined') {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    // Keep the phone header's right-hand primary slot available for the board
+    // follow control. New Discussion moves into the list toolbar instead.
+    extend(IndexPage.prototype, 'sidebarItems', function (items) {
+      if (items.items && items.items.newDiscussion) {
+        items.remove('newDiscussion');
+      }
+    });
+
+    // Replace the refresh / mark-all-read pair with one explicit compose action.
+    // This keeps the sort control on the left and a single + action on the right.
+    extend(IndexPage.prototype, 'actionItems', function (items) {
+      if (items.items && items.items.refresh) {
+        items.remove('refresh');
+      }
+      if (items.items && items.items.markAllAsRead) {
+        items.remove('markAllAsRead');
+      }
+      if (items.items && items.items.newDiscussion) {
+        items.remove('newDiscussion');
+      }
+
+      const canStartDiscussion = app.forum.attribute('canStartDiscussion') || !app.session.user;
+      const label = app.translator.trans(
+        `core.forum.index.${canStartDiscussion ? 'start_discussion_button' : 'cannot_start_discussion_button'}`
+      );
+
+      items.add(
+        'newDiscussion',
+        <Button
+          icon="fas fa-plus"
+          className="Button Button--icon FlatRateInlineNewDiscussion"
+          title={label}
+          aria-label={label}
+          onclick={() => this.newDiscussionAction().catch(() => {})}
+          disabled={!canStartDiscussion}
+        />,
+        100
+      );
+    });
+  },
+  -50
+);

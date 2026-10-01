@@ -1,0 +1,23 @@
+flatrate-forum-navigation:
+  admin:
+    quick_rail:
+      heading: Center Menu V2
+      intro_help: V1 is the warehouse MAIN menu and remains the default. These independent switches expose V2 only to the selected signed-in audience. Public guests always stay on V1.
+      admin_v2_label: Show Center Menu V2 to admins
+      admin_v2_help: Admin-only preview gate. Admins stay on V1 when this is off, even if the user gate is on.
+      user_v2_label: Show Center Menu V2 to signed-in users
+      user_v2_help: Non-admin signed-in users receive V2 when this is on. Admins are controlled only by the admin gate.
+      save_error: Could not save Center Menu V2 settings.
+  forum:
+    nav:
+      aria_label: Forum presentation navigation
+      push_to_start: Push to Start
+      technician_topics: Technician Topics
+      brands: Brands
+    quick_rail:
+      region: Quick navigation
+      profile: Profile
+      messages: Messages
+      new_discussion: New Discussion
+      technician_topics: Technician Topics
+      main: MAIN
