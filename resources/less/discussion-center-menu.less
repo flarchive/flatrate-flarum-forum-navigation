@@ -1,0 +1,123 @@
+/* Discussion routes use the board name as the mobile center control and open
+   a flat HOME + Brand LinkButton picker. Preserve the native post scrubber
+   on tablet/desktop; only replace its phone-header role. */
+@media (max-width: 767px) {
+  .DiscussionPage-nav .item-scrubber {
+    display: none !important;
+  }
+
+  .DiscussionPage-nav .item-flatrateDiscussionBrandPicker {
+    display: block !important;
+  }
+
+  .DiscussionPage-nav .item-controls,
+  .DiscussionPage-nav .item-subscription {
+    display: none !important;
+  }
+
+  .DiscussionPage-nav .item-flatrateDiscussionFollow {
+    display: flex !important;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .DiscussionHero.FlatRateDiscussionHero--collapsed .DiscussionHero-items > li:not(.item-title):not(.item-flatrateHeroToggle) {
+    display: none !important;
+  }
+
+  .DiscussionHero .FlatRateDiscussionHero-toggle,
+  .DiscussionPage-nav .FlatRateDiscussionFollowStar {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .DiscussionHero .DiscussionHero-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .DiscussionHero .item-title {
+    order: 1;
+    width: auto;
+  }
+
+  .DiscussionHero .item-flatrateHeroToggle {
+    order: 2;
+  }
+
+  .DiscussionHero .item-flatrateHeroSecondary,
+  .DiscussionHero .DiscussionHero-items > li:not(.item-title):not(.item-flatrateHeroToggle) {
+    order: 3;
+    width: 100%;
+  }
+
+  .TagHero.FlatRateParentBrandBannerHost .Hero-title {
+    display: none;
+  }
+
+  .TagHero.FlatRateParentBrandBannerHost:has(.FlatRateParentBrandBanner--collapsed) .containerNarrow > .Hero-subtitle,
+  .TagHero.FlatRateParentBrandBannerHost:has(.FlatRateParentBrandBanner--collapsed) .container > .Hero-subtitle {
+    display: none;
+  }
+
+  .FlatRateParentBrandBanner-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .FlatRateParentBrandBanner-toggle {
+    flex: 0 0 auto;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .FlatRateParentBrandBanner--collapsed .FlatRateParentBrandBanner-extra {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .DiscussionPage-nav .item-flatrateDiscussionFollow,
+  .DiscussionHero .item-flatrateHeroToggle,
+  .DiscussionHero .item-flatrateHeroSecondary {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .DiscussionPage-nav .item-flatrateDiscussionBrandPicker {
+    display: none !important;
+  }
+}
+
+/* Direct SelectDropdown children — distinct from drawer PresentationNav. */
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionPicker-link {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionPicker-home,
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink {
+  justify-content: flex-start;
+  width: 15rem;
+  max-width: ~"calc(100% - 40px)";
+  margin-left: ~"calc(50% - 7.5rem + var(--flatrate-mobile-nav-rail-offset, 0.75rem))";
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink.depth-1 {
+  padding-left: 1.5rem;
+}
+
+.FlatRateDiscussionBrandPicker .Dropdown-menu .FlatRateDiscussionBrandLink.depth-2 {
+  padding-left: 3rem;
+}
