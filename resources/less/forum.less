@@ -1,0 +1,1144 @@
+.FlatRateMaintenanceBanner {
+  box-sizing: border-box;
+  width: 100%;
+  background: #c62828;
+  color: #fff;
+  position: relative;
+  z-index: 100;
+}
+
+.FlatRateMaintenanceBanner[hidden] {
+  display: none !important;
+}
+
+.FlatRateMaintenanceBanner-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: 8px 52px 8px 16px;
+}
+
+.FlatRateMaintenanceBanner-message {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.FlatRateMaintenanceBanner-copy,
+.FlatRateMaintenanceBanner-schedule {
+  display: block;
+}
+
+.FlatRateMaintenanceBanner-schedule {
+  margin-top: 0.15rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.FlatRateMaintenanceBanner-dismiss {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  text-align: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.FlatRateMaintenanceBanner-dismiss:hover,
+.FlatRateMaintenanceBanner-dismiss:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  opacity: 1;
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+
+@media (max-width: 767px) {
+  .FlatRateMaintenanceBanner-inner {
+    min-height: 48px;
+    padding: 8px 48px 8px 12px;
+  }
+
+  .FlatRateMaintenanceBanner-message {
+    font-size: 13px;
+  }
+
+  .FlatRateMaintenanceBanner-dismiss {
+    right: 4px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+/* Synthetic locked General Live row on authenticated MAIN (not a Discussion). */
+.FlatRateMainLiveChat {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 12px;
+}
+
+.FlatRateMainLiveChat-row {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  box-sizing: border-box;
+  padding: 6px 8px 6px 4px;
+  background: var(--control-bg);
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+}
+
+.FlatRateMainLiveChat-link {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 44px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.FlatRateMainLiveChat-link:hover {
+  color: inherit;
+}
+
+.FlatRateMainLiveChat-link:focus-visible,
+.FlatRateMainLiveChat-toggle:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -3px;
+}
+
+.FlatRateMainLiveChat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  color: #66ff00;
+}
+
+.FlatRateMainLiveChat-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+}
+
+.FlatRateMainLiveChat-title {
+  justify-self: start;
+  min-width: 0;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: inherit;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.FlatRateMainLiveChat-meta {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  justify-self: end;
+  gap: 0.45rem;
+  min-width: 0;
+  margin-left: auto;
+  font-size: 12px;
+  line-height: 1.3;
+  color: #66ff00;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.FlatRateMainLiveChat-count {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: inherit;
+}
+
+.FlatRateMainLiveChat-toggle {
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 44px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border: 2px solid var(--muted-color, #888);
+  border-radius: var(--border-radius);
+  background: transparent;
+  color: var(--muted-color, inherit);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.FlatRateMainLiveChat-toggle--on {
+  border-color: #66ff00;
+  color: #111;
+  background: #66ff00;
+}
+
+.FlatRateMainLiveChat-toggle:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 420px) {
+  .FlatRateMainLiveChat-row {
+    padding-right: 6px;
+  }
+
+  .FlatRateMainLiveChat-toggle {
+    min-width: 48px;
+    padding: 0 10px;
+  }
+}
+
+/* HOME-only pinned START board shortcut (not a Discussion model row). */
+.FlatRateStartBoardPin {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 12px;
+}
+
+.FlatRateStartBoardPin-bar {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  background: var(--control-bg);
+  border: 1px solid var(--control-bg);
+  border-radius: var(--border-radius);
+  transition: min-height 120ms ease;
+}
+
+.FlatRateStartBoardPin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+}
+
+.FlatRateStartBoardPin-link:hover {
+  color: inherit;
+}
+
+.FlatRateStartBoardPin-link:focus-visible,
+.FlatRateStartBoardPin-close:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -3px;
+}
+
+.FlatRateStartBoardPin-pin,
+.FlatRateStartBoardPin-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 42px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.FlatRateStartBoardPin-pin {
+  justify-self: start;
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+
+.FlatRateStartBoardPin-close {
+  justify-self: end;
+  border: 0;
+  background: transparent;
+  color: var(--muted-color, currentColor);
+  cursor: pointer;
+}
+
+.FlatRateStartBoardPin-close:hover {
+  color: var(--primary-color);
+}
+
+.FlatRateStartBoardPin-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: #66ff00;
+}
+
+.FlatRateStartBoardPin-label,
+.FlatRateStartBoardPin-icon .icon {
+  color: #66ff00;
+  font-weight: 700;
+}
+
+.FlatRateStartBoardPin-label {
+  letter-spacing: 0.02em;
+}
+
+.FlatRatePresentationNav {
+  margin: 0;
+  padding: 0;
+}
+
+/* Presentation owner: hide native primary TagLinkButton list while this extension is active. */
+.IndexPage-nav .TagLinkButton,
+.IndexPage-nav .item-separator,
+.IndexPage-nav .item-moreTags {
+  display: none !important;
+}
+
+.FlatRatePresentationNav-list,
+.FlatRatePresentationNav-tree,
+.FlatRatePresentationNav-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.FlatRatePresentationNav-item {
+  margin: 0.15rem 0;
+}
+
+.FlatRatePresentationNav-row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 2rem;
+}
+
+.FlatRatePresentationNav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.35rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.FlatRatePresentationNav-link:hover,
+.FlatRatePresentationNav-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.FlatRatePresentationNav-link--start,
+.FlatRatePresentationNav-link--technician {
+  gap: 0.4rem;
+}
+
+.FlatRatePresentationNav-link--start,
+.FlatRatePresentationTitle--start {
+  color: #66ff00 !important;
+  font-weight: 700;
+}
+
+.FlatRatePresentationNav-link--start .icon,
+.App-titleControl .fa-play-circle {
+  color: #66ff00 !important;
+}
+
+.FlatRatePresentationNav-brand.depth-1 {
+  margin-left: 1rem;
+}
+
+.FlatRatePresentationNav-brandLink {
+  flex: 1;
+}
+
+/* Brand hero tagline + parent family links */
+.FlatRateBrandTagline {
+  margin: 0.35rem 0 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.85;
+  color: inherit;
+}
+
+/* Canonical Brand heroes already communicate the Brand in text. Once the
+   navigation extension has projected a Brand tagline, suppress the native tag
+   icon so Audi/BMW/etc. do not repeat a car glyph beside the Brand name. */
+.TagHero:has(.FlatRateBrandTagline) .Hero-title .icon {
+  display: none !important;
+}
+
+.FlatRateBrandFamilyLinks {
+  margin: 0.55rem 0 0;
+  text-align: center;
+}
+
+.FlatRateBrandFamilyLinks-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.15rem 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.FlatRateBrandFamilyLinks-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.FlatRateBrandFamilyLinks-sep {
+  opacity: 0.55;
+}
+
+.FlatRateBrandFamilyLinks-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.2rem;
+}
+
+.FlatRateBrandFamilyLinks-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.FlatRateMainLandingPins {
+  margin: 0 0 12px;
+}
+
+.FlatRateMainLandingPins-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .FlatRatePresentationNav-link {
+    min-height: 2.5rem;
+  }
+
+  .App-drawer {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Flarum renders the forum title, HeaderPrimary, and HeaderSecondary as
+     siblings inside the drawer header container. Flatten HeaderSecondary only
+     on phones so its Search row can become the first flex item above
+     FlatRate.wiki while the desktop header remains untouched. */
+  .App-drawer .App-header .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .App-drawer .Header-secondary,
+  .App-drawer .Header-secondary > .Header-controls {
+    display: contents;
+  }
+
+  /* All secondary controls remain after the title/header controls. Search is
+     the one exception: it is promoted to the top edge. */
+  .App-drawer .Header-secondary > .Header-controls > li {
+    order: 30;
+  }
+
+  .App-drawer .item-search {
+    order: -30;
+    box-sizing: border-box;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  /* Preserve the established drawer contract for the session item. Once
+     HeaderSecondary is flattened above, the scoped override below places the
+     avatar after the FlatRate.wiki/header block and before Notifications. */
+  .App-drawer .item-session {
+    order: -1;
+  }
+
+  .App-drawer .Header-secondary > .Header-controls > .item-session {
+    order: 10;
+    margin-top: 10px;
+  }
+
+  .App-drawer .item-notifications {
+    order: 20;
+  }
+
+  /* Core Flarum owns the search component and its actual query state. For the
+     phone drawer, visually replace the verbose core placeholder with the
+     concise requested label without changing input behavior or desktop copy. */
+  .App-drawer .item-search .Search-input {
+    position: relative;
+  }
+
+  .App-drawer .item-search .Search-input::before {
+    content: "Search";
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 13px;
+    transform: translateY(-50%);
+    color: var(--muted-color, currentColor);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .App-drawer .item-search .Search-input:has(.FormControl:not(:placeholder-shown))::before {
+    display: none;
+  }
+
+  .App-drawer .item-search .FormControl::placeholder {
+    color: transparent !important;
+    opacity: 0 !important;
+  }
+
+  .App-drawer .item-flatrateDrawerNav {
+    float: none !important;
+    display: block !important;
+    width: 100%;
+    clear: both;
+    margin: 0.75rem 0 0;
+    /* Match Header-controls > li horizontal inset (10px). */
+    padding: 0.75rem 10px 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .App-drawer .FlatRateDrawerNav,
+  .App-drawer .FlatRatePresentationNav,
+  .App-drawer .FlatRatePresentationNav-link {
+    width: 100%;
+  }
+
+  .App-drawer .FlatRatePresentationNav-link {
+    display: flex;
+    /* Match Flarum 1.8.19 .Button horizontal padding in the drawer. */
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .App-drawer .FlatRatePresentationNav-brandLink {
+    gap: 0.4rem;
+  }
+
+  /* Hide Live Chat in the phone hamburger only. Desktop header keeps it.
+     Do not mutate the live-chat package. */
+  .App-drawer .item-LiveChats {
+    display: none !important;
+  }
+
+  /* These shortcuts are intentionally omitted from the phone hamburger.
+     Their routes/features remain available elsewhere, and desktop header
+     presentation is unchanged because every selector is drawer-scoped. */
+  .App-drawer .item-FlatRateMessages,
+  .App-drawer .item-flatrateDrawerFollowing,
+  .App-drawer .item-flatrateDrawerStart {
+    display: none !important;
+  }
+
+  .App-drawer .item-flatrateDrawerFollowing,
+  .App-drawer .item-flatrateDrawerStart {
+    width: 100%;
+  }
+
+  /* Preserve the underlying Following/START presentation contract even though
+     those shortcuts are currently hidden from the phone hamburger. */
+  .App-drawer .FlatRateDrawerFollowing,
+  .App-drawer .FlatRateDrawerStart {
+    display: contents;
+  }
+
+  .App-drawer .item-flatrateDrawerFollowing a,
+  .App-drawer .item-flatrateDrawerFollowing .Button,
+  .App-drawer .item-flatrateDrawerStart a,
+  .App-drawer .item-flatrateDrawerStart .Button {
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 13px !important;
+    text-align: left;
+    min-height: 36px;
+  }
+
+  .App-drawer .item-flatrateDrawerFollowing .Button-icon,
+  .App-drawer .item-flatrateDrawerFollowing .icon,
+  .App-drawer .item-flatrateDrawerStart .Button-icon,
+  .App-drawer .item-flatrateDrawerStart .icon {
+    float: none !important;
+    margin: 0 7px 0 0 !important;
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+  }
+
+  .App-drawer .FlatRateDrawerStart-link,
+  .App-drawer .FlatRateDrawerStart-link .Button-label,
+  .App-drawer .FlatRateDrawerStart-link .icon {
+    color: #66ff00 !important;
+    font-weight: 700;
+  }
+
+  /* START also exists in the presentation tree. Keep that copy hidden in the
+     hamburger so there is no fallback duplicate. */
+  .App-drawer .FlatRatePresentationNav-item--community {
+    display: none !important;
+  }
+
+  /* Center popup brand list: text only (LinkButton brands have no car icons). */
+  .App-titleControl .FlatRateDiscussionBrandLink .icon {
+    display: none !important;
+  }
+
+  .App-drawer .FlatRatePresentationNav-item--technician-topics,
+  .App-titleControl .FlatRatePresentationNav-item--technician-topics {
+    display: none !important;
+  }
+
+  /* Center popup is a focused HOME + brand picker. Following and START remain
+     available in their other navigation surfaces but do not appear here. */
+  .App-titleControl .item-following,
+  .App-titleControl .FlatRatePresentationNav-item--community {
+    display: none !important;
+  }
+
+  /* Recast the native All Discussions option as the centered MAIN action.
+     Flarum supplies `far fa-comments`; overriding its glyph with the Font
+     Awesome 5 Free solid warehouse codepoint is visually equivalent to
+     `fas fa-warehouse` without changing the shared desktop/hamburger vnode. */
+  /* Center the common Brand column under the warehouse quick-rail control.
+     Labels stay left-aligned inside that column; child indentation is padding. */
+  .App-titleControl .Dropdown-menu {
+    --flatrate-mobile-nav-rail-offset: 0rem;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    width: 15rem;
+    max-width: ~"calc(100% - 40px)";
+    min-height: 0;
+    margin-left: ~"calc(50% - 7.5rem + var(--flatrate-mobile-nav-rail-offset, 0rem))";
+    margin-right: auto;
+    padding: 15px 0 !important;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-icon,
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .icon {
+    position: static !important;
+    float: none !important;
+    margin: 0 !important;
+    width: 16px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-icon::before,
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .icon::before {
+    content: "\f494";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-label {
+    font-size: 0;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-label::after {
+    content: "MAIN";
+    font-size: 16px;
+  }
+
+  /* Phone title-control Brand links: SelectDropdown-compatible li > a rows.
+     Keep one centered Brand column, left-align every make, and indent child
+     marques from the same column edge so umbrella groups read as a tree. */
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionBrandLink {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    width: 15rem;
+    max-width: ~"calc(100% - 40px)";
+    min-height: 0;
+    margin-left: ~"calc(50% - 7.5rem + var(--flatrate-mobile-nav-rail-offset, 0rem))";
+    margin-right: auto;
+    padding: 15px 0 !important;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionBrandLink.depth-1 {
+    padding-left: 1.5rem !important;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionBrandLink.depth-2 {
+    padding-left: 3rem !important;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionBrandLink .Button-label {
+    font-size: 16px;
+  }
+
+  /* FORUM-NAV-MOBILE-POLISH-001
+   * Keep the mobile header brand-led and visually consistent without changing
+   * route semantics or the underlying accessible/current-context labels.
+   */
+  .IndexPage .FlatRateInlineNewDiscussion,
+  .IndexPage .FlatRateInlineNewDiscussion .Button-icon,
+  .IndexPage .FlatRateInlineNewDiscussion .icon {
+    color: var(--primary-color) !important;
+  }
+
+  /* Follow/favorite controls keep the phone header's far-right slot.
+     FoF Follow Tags ships a phone-only right: 50px offset on the button;
+     explicitly neutralize that offset here. */
+  .IndexPage .App-primaryControl {
+    right: 8px !important;
+  }
+
+  .IndexPage-nav .SubscriptionButton {
+    right: 0 !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--muted-color, currentColor) !important;
+  }
+
+  /* The board Follow control becomes the compact top-right star. Keep the
+     existing FoF mutation/tooltip behavior; only collapse its visual chrome. */
+  .IndexPage-nav .SubscriptionButton .Button-label,
+  .IndexPage-nav .SubscriptionButton .Button-caret {
+    display: none !important;
+  }
+
+  .IndexPage-nav .SubscriptionButton .Button-icon,
+  .IndexPage-nav .SubscriptionButton > .icon,
+  .IndexPage-nav .SubscriptionButton .icon:not(.Button-caret) {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    font-size: 24px !important;
+    line-height: 44px !important;
+    text-align: center;
+  }
+
+  /* Board/index center trigger shows FLATRATE.WIKI. Discussion routes use
+     FlatRateDiscussionBrandPicker and must keep the JS contextual label. */
+  /* Flarum 1.8.19 mounts App-titleControl in the App navigation layer, not
+     inside App-header. Center the max-content trigger with auto margins.
+     Do not transform this element: a transform becomes the containing block
+     for its fixed dropdown and breaks the viewport-fixed bottom sheet. */
+  .App-titleControl {
+    left: 0 !important;
+    right: 0 !important;
+    width: max-content !important;
+    /* Less.php evaluates a bare calc() and emitted calc(-20%) for this line. */
+    max-width: ~"calc(100% - 120px)";
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
+  }
+
+  .App-titleControl > .Dropdown-toggle {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: auto !important;
+    min-height: 44px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    /* Core Button horizontal padding creates a visible gap between the
+       centered label and the absolutely-positioned caret. Remove it here so
+       the label still owns the viewport centerline and the caret can sit flush
+       against the label edge. */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    line-height: 1 !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    vertical-align: middle;
+  }
+
+  .App-titleControl.FlatRatePresentationTitle--root:not(.FlatRateDiscussionBrandPicker) > .Dropdown-toggle .Button-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1 !important;
+    font-size: 0 !important;
+  }
+
+  .App-titleControl.FlatRatePresentationTitle--root:not(.FlatRateDiscussionBrandPicker) > .Dropdown-toggle .Button-label::after {
+    content: "FLATRATE.WIKI";
+    font-size: 16px;
+    color: var(--primary-color);
+  }
+
+  .App-titleControl.FlatRatePresentationTitle--contextual > .Dropdown-toggle .Button-label,
+  .App-titleControl.FlatRatePresentationTitle--technician > .Dropdown-toggle .Button-label,
+  .FlatRateDiscussionBrandPicker > .Dropdown-toggle .Button-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1 !important;
+    font-size: 16px !important;
+    color: var(--primary-color);
+  }
+
+  .App-titleControl.FlatRatePresentationTitle--contextual > .Dropdown-toggle .Button-label::after,
+  .App-titleControl.FlatRatePresentationTitle--technician > .Dropdown-toggle .Button-label::after,
+  .FlatRateDiscussionBrandPicker > .Dropdown-toggle .Button-label::after {
+    content: none !important;
+  }
+
+  .App-titleControl.FlatRatePresentationTitle--technician > .Dropdown-toggle > .icon.fa-wrench,
+  .App-titleControl.FlatRatePresentationTitle--technician > .Dropdown-toggle > .Button-icon.fa-wrench {
+    position: absolute !important;
+    right: 100%;
+    left: auto;
+    top: 50%;
+    display: inline-flex !important;
+    align-items: center;
+    width: auto !important;
+    margin-right: 0.35rem !important;
+    margin-left: 0 !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    color: var(--primary-color);
+    transform: translateY(-50%);
+  }
+
+  .App-titleControl > .Dropdown-toggle > .icon:not(.Button-caret),
+  .App-titleControl > .Dropdown-toggle > .Button-icon:not(.Button-caret) {
+    display: none !important;
+  }
+
+  .App-titleControl > .Dropdown-toggle .Button-caret {
+    position: absolute !important;
+    /* Horizontal toggle padding is zero above, so 100% is the label edge.
+       Keep the caret directly adjacent without shifting the centered label. */
+    left: 100%;
+    top: 50%;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin: 0 !important;
+    line-height: 1 !important;
+    color: var(--primary-color) !important;
+    vertical-align: middle;
+    transform: translateY(-50%);
+  }
+
+  .App-titleControl > .Dropdown-toggle .Button-caret.fa-sort::before {
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+
+  /* MAIN is a text/icon accent, not a filled active-state tile. */
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a,
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionPicker-home {
+    background: transparent !important;
+    color: var(--primary-color) !important;
+  }
+
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-label,
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .Button-icon,
+  .App-titleControl .Dropdown-menu .item-allDiscussions > a .icon,
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionPicker-home .Button-label,
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionPicker-home .Button-icon,
+  .App-titleControl .Dropdown-menu .FlatRateDiscussionPicker-home .icon {
+    color: var(--primary-color) !important;
+  }
+
+  /* Index-page center picker: use one centered Brand column. Every top-level
+     make is left-aligned to the same edge; child marques are consistently
+     indented from that edge instead of drifting toward the menu boundary. */
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-row {
+    width: 100%;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    width: 15rem;
+    max-width: ~"calc(100% - 40px)";
+    box-sizing: border-box;
+    min-height: 0;
+    margin-left: ~"calc(50% - 7.5rem + var(--flatrate-mobile-nav-rail-offset, 0rem))";
+    margin-right: auto;
+    padding: 15px 0 !important;
+    text-align: left;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink .Button-icon,
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink .icon {
+    display: none !important;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brand.depth-1,
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brand.depth-2 {
+    margin-left: 0;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brand.depth-1 > .FlatRatePresentationNav-row .FlatRatePresentationNav-brandLink {
+    padding-left: 1.5rem !important;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brand.depth-2 > .FlatRatePresentationNav-row .FlatRatePresentationNav-brandLink {
+    padding-left: 3rem !important;
+  }
+
+  /* Drawer keeps the label/count tab stop. The IndexPage center sheet is
+     Brand-name only: PresentationNav still emits BrandVoteTotal, and this
+     surface hides it without reserving the old count column. */
+  .App-drawer .FlatRatePresentationNav-brandName {
+    flex: 0 0 10rem;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .App-drawer .FlatRatePresentationNav-brandLink .FlatRateBrandVoteTotal {
+    flex: 0 0 auto;
+    margin-left: 1.25rem;
+    padding-left: 0;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandName {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .App-titleControl .Dropdown-menu .FlatRatePresentationNav-brandLink .FlatRateBrandVoteTotal {
+    display: none !important;
+  }
+  /* FORUM-NAV-UI-003: sticky quick rail above the scrolling Brand region.
+     One scrollport on the center sheet. The rail does not use the Brand offset.
+     The title is not transformed, so this menu can stay a viewport-fixed
+     bottom sheet instead of a top-anchored absolute box. */
+  .App-titleControl .Dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw;
+    height: 65dvh;
+    max-height: 65dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .App-titleControl .Dropdown-menu > .item-allDiscussions {
+    display: none !important;
+  }
+
+  .App-titleControl .item-flatrateQuickRail {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--dropdown-bg, var(--body-bg, #fff));
+    list-style: none;
+  }
+
+  .FlatRateCenterQuickRail {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 4px 8px;
+    overflow-x: hidden;
+  }
+
+  .FlatRateCenterQuickRail--guest,
+  .FlatRateCenterQuickRail--v1 {
+    justify-content: center;
+  }
+
+  .FlatRateCenterQuickRail-control {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--primary-color);
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  .FlatRateCenterQuickRail-control:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .FlatRateCenterQuickRail-control .Avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 28px;
+  }
+
+  /* 320–430 covers mandatory 360, 390, and 412. Five 44px targets fit without a second axis. */
+  @media (min-width: 320px) and (max-width: 430px) {
+    .FlatRateCenterQuickRail {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
+}
+
+/* HeaderSecondary also renders in the desktop top bar. Do not mount the
+   41-board tree or Following copy there; IndexPage sideNav already owns
+   desktop presentation. */
+@media (min-width: 768px) {
+  .item-flatrateDrawerNav,
+  .item-flatrateDrawerFollowing,
+  .item-flatrateDrawerStart,
+  .IndexPage-nav .item-flatrateQuickRail,
+  .FlatRateCenterQuickRail {
+    display: none !important;
+  }
+
+  .IndexPage-nav .FlatRatePresentationNav-brandLink .icon {
+    display: none;
+  }
+}
+
+
+/* FORUM-BRAND-VOTE-TOTALS-001
+ * Sidebar and Brand hero render the exact-Brand total.
+ * The IndexPage center sheet suppresses that same node.
+ * Lime is the default/read state; pink is a secondary accent for the exact
+ * Brand's positive Follow state. The number itself is never a Follow control.
+ */
+.FlatRateBrandVoteTotal {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #84cc16;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.FlatRateBrandVoteTotal.is-followed {
+  color: #c72d5d;
+}
+
+.FlatRatePresentationNav-brandLink {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+}
+
+.FlatRatePresentationNav-brandName {
+  min-width: 0;
+}
+
+/* Sidebar and drawer Brand totals sit after the label. The IndexPage center
+   sheet hides this node instead of reserving a count column. */
+.FlatRatePresentationNav-brandLink .FlatRateBrandVoteTotal {
+  margin-left: auto;
+  padding-left: 0.75rem;
+}
+
+.FlatRateDiscussionBrandLink .Button-label {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+.FlatRateDiscussionBrandName {
+  flex: 0 0 10rem;
+  min-width: 0;
+  text-align: left;
+}
+
+.FlatRateDiscussionBrandLink .FlatRateBrandVoteTotal {
+  flex: 0 0 auto;
+  margin-left: 1.25rem;
+  padding-left: 0;
+}
+
+/* The current aggregate producer serializes a real 0. Product presentation
+   now omits zero totals everywhere this Brand-total component is reused. */
+.FlatRateBrandVoteTotal[aria-label*="board total: 0 upvotes"] {
+  display: none !important;
+}
+
+.TagHero .Hero-title .FlatRateBrandVoteTotal {
+  margin-left: 0.5rem;
+  font-size: 0.72em;
+  vertical-align: baseline;
+}
