@@ -2,13 +2,24 @@
 
 > **Read-only archive of released versions of flatrate/flarum-forum-navigation.** Not for installation: use [Packagist](https://packagist.org/packages/flatrate/flarum-forum-navigation) or the [upstream repository](https://github.com/mrkcntrmn/flatrate-flarum-forum-navigation).
 
-**0** versions archived · Latest: [`v1.4.18`](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.4.18) · License: `MIT` · Flarum: `^1.8.19`
+**47** versions archived · Latest: [`v1.4.18`](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.4.18) · License: `MIT` · Flarum: `^1.8.19`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| — | — | — | — |
+| `v1.0.0` | 2026-09-08 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.0.0) |
+| `v1.0.0-rc.1` | 2026-09-08 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.0.0-rc.1) |
+| `v1.1.0` | 2026-09-13 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.1.0) |
+| `v1.1.1` | 2026-09-13 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.1.1) |
+| `v1.2.0` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.0) |
+| `v1.2.1` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.1) |
+| `v1.2.2` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.2) |
+| `v1.2.3` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.3) |
+| `v1.2.4` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.4) |
+| `v1.2.5` | 2026-09-14 | `^1.8.5` | [Browse](https://github.com/flarchive/flatrate-flarum-forum-navigation/tree/archive/v1.2.5) |
+
+[View all 47 versions](https://github.com/flarchive/flatrate-flarum-forum-navigation/tags)
 
 Catalog entry: [packages/flatrate-flarum-forum-navigation.json](https://github.com/flarchive/archive-index/blob/main/packages/flatrate-flarum-forum-navigation.json)
 
